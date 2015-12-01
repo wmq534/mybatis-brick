@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.github.mybatis.spring.AutowireTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in com.github.mybatis.spring.AutowireTest
