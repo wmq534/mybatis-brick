@@ -107,3 +107,29 @@ public class User extends IdEntity {
     
 }
 ```
+7.分页实例
+```java
+  @Test
+  public void testPagination() throws Exception {
+    SqlSession session = sqlSessionFactory.openSession();
+    try {
+      TestPageMapper mapper = session.getMapper(TestPageMapper.class);
+      assertEquals(1, mapper.insert(new TestPage("github", "github-process")));
+      assertEquals(1, mapper.insert(new TestPage("oschina", "oschina-process")));
+      assertEquals(2, mapper.countAll());
+      Page<TestPage> page1 = new Page<TestPage>(1, 1, false);
+      mapper.pagination(page1);
+      //System.out.println(page1);
+      TestPage p1 = page1.get(0);
+      assertEquals(1, p1.getId().intValue());
+      assertEquals("github-process", p1.getName());
+      Page<TestPage> page2 = new Page<TestPage>(2, 1);
+      mapper.pagination(page2);
+      //System.out.println(page2);
+      TestPage p2 = page2.get(0);
+      assertEquals(2, p2.getId().intValue());
+      assertEquals("oschina-process", p2.getName());
+    } finally {
+      CloseableUtil.closeQuietly(session);
+    }
+  ```
